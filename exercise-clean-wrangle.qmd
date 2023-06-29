@@ -67,6 +67,35 @@ traps_subset <- lobster_traps %>%
    
 ## Exercise 4
 
+```{r}
+total_abundance <- lobster_abundance %>%
+  group_by(SITE,YEAR) %>%
+  summarize(total_lobsters = sum(COUNT, na.rm = TRUE))
+
+total_traps <- traps_subset %>% 
+  group_by(SITE, YEAR) %>% 
+  summarize(total_traps = sum(TRAPS, na.rm = TRUE))
+```
+
+
+
 ## Exercise 5
+
+```{r}
+abundance_traps1 <- total_abundance %>%
+  left_join(total_traps, by = c("SITE","YEAR"))
+
+abundance_traps2 <- total_abundance %>%
+  right_join(total_traps, by = c("SITE","YEAR"))
+
+abundance_traps3 <- total_abundance %>%
+  inner_join(total_traps, by = c("SITE","YEAR"))
+
+abundance_traps4 <- total_abundance %>%
+  full_join(total_traps, by = c("SITE","YEAR"))
+```
+ 
+
+
 
 ## Exercise 6
